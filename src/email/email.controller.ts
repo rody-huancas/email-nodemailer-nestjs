@@ -12,4 +12,14 @@ export class EmailController {
 
     return { message: "Email sent successfully" }
   }
+
+  @Post('welcome')
+  async sendWelcomeEmail(@Body() body: { email: string; name: string; verificationCode: string }) {
+    await this.emailService.sendWelcomeEmail(body.email, {
+      name: body.name,
+      verificationCode: body.verificationCode
+    });
+
+    return { message: "Welcome email sent successfully" }
+  }  
 }
